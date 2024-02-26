@@ -1,6 +1,6 @@
 # Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup
 
-This repository is for the paper "Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup". If you use this repository, please cite the paper.
+This repository is for the paper "Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup". If you use this repository, please cite the paper. The original datasets used in the paper are in the folder wikirag_090124.
 
 ## Prerequisites
 
