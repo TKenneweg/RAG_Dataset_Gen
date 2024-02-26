@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
 
 
-    with open("wikirag_090124/A_r.pkl", "rb") as f:
+    with open("wikirag/A_r.pkl", "rb") as f:
         dictlist = pickle.load(f)
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size = 1028,

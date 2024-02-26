@@ -27,12 +27,13 @@ Dataset Creation:
 
 
 RAG Process:
-    chatbot = Chatbot(ragType="ABARAG")
-    description = f"This a run of advanced boolean agent rag on A_r_first300. Repaired version! less conservative"
-    genAnswers(f"{foldername}/A_r_first300.pkl",chatbot, description=description)
+    chatbot = Chatbot(ragType="Naive")
+    description = f"This a naive RAG run."
+    genAnswers(f"{foldername}/A_f.pkl",chatbot, description=description)
     
     Note that genAnswers saves a pkl file that contains the current timestamp to prevent confusion among different RAG runs.
     Furthermore a .txt with the same name is generated that contains a description of the run. 
+    WARNING you need to have a executed embedd.py before this will work!
 
 Evaluation:
     evaluator = Evaluator()
@@ -51,3 +52,6 @@ Evaluation:
         pickle.dump(newdictlist, f)
 
 
+
+Embedding: 
+    embedd.py takes a filename in line 19. You should probably pass A_r here. It creates a chroma vector database in a data folder. You can further adjust the subfolder and collection names
