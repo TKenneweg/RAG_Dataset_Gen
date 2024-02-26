@@ -1,23 +1,27 @@
-This is repo for the paper "Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup". If you use this repo please cite the paper.
+# Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup
 
-For everything to work you need to add an OPENAI_API_KEY in a .env file to the project!
+This repository is for the paper "Retrieval Augmented Generation Systems: Automatic Dataset Creation, Evaluation and Boolean Agent Setup". If you use this repository, please cite the paper.
 
-This repo provides functionality to create datasets from Wikipedia, which are not or only partially contained in the LLM training set. 
-Functionality to automatically evaluate different RAG systems using LLM evaluation is also included. 
+## Prerequisites
 
-The file main.py contains all steps to create, answer and evaluate a dataset. 
-There are 3 main classes: 
+For everything to work, you need to add an `OPENAI_API_KEY` in a `.env` file to the project!
 
-1. WikiScrapper: Responsible to scrape articles of Wikipedia, filter them and generate questions.  
-2. Chatbot: Implement your RAG system here. Naive RAG is already implemented. 
-3. Evaluator: Used to evaluate questions/article - answer pairs. Evaluates for truthfulness and relevance. 
+## About
 
+This repository provides functionality to create datasets from Wikipedia, which are not or only partially contained in the LLM training set. It also includes functionality to automatically evaluate different RAG systems using LLM evaluation.
 
-Furthermore, embedd.py provides a ready-made script to transform your Wikipedia dataset into a chroma vector db for RAG. 
+The file `main.py` contains all steps to create, answer, and evaluate a dataset. There are 3 main classes:
 
-Generally reading everything in main.py starting from if __name__ == "__main__": should give you a good understanding of the process.
+1. **WikiScrapper**: Responsible for scraping articles from Wikipedia, filtering them, and generating questions.
+2. **Chatbot**: Implement your RAG system here. Naive RAG is already implemented.
+3. **Evaluator**: Used to evaluate questions/article - answer pairs. Evaluates for truthfulness and relevance.
 
-Dataset Creation:
+Furthermore, `embedd.py` provides a ready-made script to transform your Wikipedia dataset into a chroma vector db for RAG.
+
+Generally, reading everything in `main.py` starting from `if __name__ == "__main__":` should give you a good understanding of the process.
+
+### Dataset Creation
+```
     foldername= "wikirag"
     scrapper = WikiScrapper(path = foldername)
     scrapper.scrapeAndSaveArticles(n=200) #this outputs A_r
@@ -25,17 +29,23 @@ Dataset Creation:
     scrapper.genQs(foldername+ "/A_d.pkl") #add qs to file, uses gpt
     scrapper.filterForRecentness(foldername+ "/A_d.pkl") #outputs A_f, uses gpt
 
+```
+
+You can view generated files using view.py
+
 
 RAG Process:
+```
     chatbot = Chatbot(ragType="Naive")
     description = f"This a naive RAG run."
     genAnswers(f"{foldername}/A_f.pkl",chatbot, description=description)
-    
-    Note that genAnswers saves a pkl file that contains the current timestamp to prevent confusion among different RAG runs.
-    Furthermore a .txt with the same name is generated that contains a description of the run. 
-    WARNING you need to have a executed embedd.py before this will work!
+``` 
+Note that genAnswers saves a pkl file that contains the current timestamp to prevent confusion among different RAG runs.
+Furthermore a .txt with the same name is generated that contains a description of the run. 
+WARNING you need to have a executed embedd.py before this will work!
 
 Evaluation:
+```
     evaluator = Evaluator()
     filename = f"{foldername}/A_r_first300_20240125_111901.pkl"
     with open(filename, "rb") as f:
@@ -50,8 +60,8 @@ Evaluation:
     
     with open(f"{filename[:-4]}_scored.pkl", "wb") as f:
         pickle.dump(newdictlist, f)
+```
 
 
-
-Embedding: 
-    embedd.py takes a filename in line 19. You should probably pass A_r here. It creates a chroma vector database in a data folder. You can further adjust the subfolder and collection names
+**Embedding:** 
+embedd.py takes a filename in line 19. You should probably pass A_r here. It creates a chroma vector database in a data folder. You can further adjust the subfolder and collection names
