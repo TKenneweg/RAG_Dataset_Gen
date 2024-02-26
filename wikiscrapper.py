@@ -8,9 +8,11 @@ from openai import OpenAI
 import json
 import time
 import pickle
+from dotenv import load_dotenv
+
 class WikiScrapper:
     def __init__(self, path):
-        # path = path + 
+        load_dotenv()
         self.path = path
 
 
@@ -25,7 +27,8 @@ class WikiScrapper:
             for title in titles:
                 elem = {}
                 try:
-                    page = wikipedia.page(title, auto_suggest=False) # shit
+                    #this will sometimes fail, so we need to catch the exception
+                    page = wikipedia.page(title, auto_suggest=False) 
                 except:
                     continue
                 elem["title"]= title
@@ -152,9 +155,9 @@ class WikiScrapper:
 
         # Save A_f to disk
         foldername = filename.split("/")[0]
-        with open(f'{foldername}/A_f_long.pkl', 'wb') as file:
+        with open(f'{foldername}/A_f.pkl', 'wb') as file:
             pickle.dump(dictlist, file)
-        print(f"Saved {len(dictlist)} articles to file {foldername}/A_f_long.pkl")
+        print(f"Saved {len(dictlist)} articles to file {foldername}/A_f.pkl")
 
 
 ############################################ utility code ############################################
