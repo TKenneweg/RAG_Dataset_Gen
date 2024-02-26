@@ -6,7 +6,7 @@ This repository is for the paper "Retrieval Augmented Generation Systems: Automa
 
 For everything to work, you need to add an `OPENAI_API_KEY` in a `.env` file to the project!
 
-## Key Features
+## Main
 
 This repository provides functionality to create datasets from Wikipedia, which are not or only partially contained in the LLM training set. It also includes functionality to automatically evaluate different RAG systems using LLM evaluation.
 
@@ -69,6 +69,7 @@ This will generate a pkl file with the same name and an added _scored that conta
 embedd.py takes a filename in line 19. You should probably pass A_r here. It creates a chroma vector database in a data folder. You can further adjust the subfolder and collection names
 
 **Histograms**
+You can use imggen.py to generate the histograms shown in the paper.
 
 
 
