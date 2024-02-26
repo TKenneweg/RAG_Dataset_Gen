@@ -45,4 +45,4 @@ def plotHistogrammOverTruthfulness(filename):
 
 if __name__ == "__main__":
     #ABARAG
-    plotHistogrammOverTruthfulness("wikirag_090124/A_r_first300_20240125_111901_scored.pkl")
+    plotHistogrammOverTruthfulness("wikirag/A_f_20240226_113356_scored.pkl")

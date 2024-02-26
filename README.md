@@ -6,7 +6,7 @@ This repository is for the paper "Retrieval Augmented Generation Systems: Automa
 
 For everything to work, you need to add an `OPENAI_API_KEY` in a `.env` file to the project!
 
-## About
+## Key Features
 
 This repository provides functionality to create datasets from Wikipedia, which are not or only partially contained in the LLM training set. It also includes functionality to automatically evaluate different RAG systems using LLM evaluation.
 
@@ -31,7 +31,8 @@ Generally, reading everything in `main.py` starting from `if __name__ == "__main
 
 ```
 
-You can view generated files using view.py
+You can view generated files using view.py. Every .pkl file in this project is a list of dicts.
+Different function add different fields to the dicts like "question", "answer", "title", "content", "url"
 
 
 RAG Process:
@@ -61,7 +62,13 @@ Evaluation:
     with open(f"{filename[:-4]}_scored.pkl", "wb") as f:
         pickle.dump(newdictlist, f)
 ```
+This will generate a pkl file with the same name and an added _scored that contains fields for truthfulness and relevance
 
 
-**Embedding:** 
+**Embedding** 
 embedd.py takes a filename in line 19. You should probably pass A_r here. It creates a chroma vector database in a data folder. You can further adjust the subfolder and collection names
+
+**Histograms**
+
+
+

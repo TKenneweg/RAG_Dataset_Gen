@@ -11,11 +11,7 @@ def genAnswers(filename,chatbot, description):
     with open(filename, "rb") as f:
         dictlist = pickle.load(f)
     filename = filename[:-4]#remove .pkl from filename
-
-    # dictlist = dictlist[7:17] #good range for testing
-    # dictlist = dictlist[14:18] #good range for testing
-
-    dictlist = dictlist[0:300] #for safety
+    # dictlist = dictlist[0:300] #for safety
 
     dictlist_answers = []
     n_not_retrieved = 0
@@ -58,15 +54,15 @@ def genAnswers(filename,chatbot, description):
 
 if __name__ == "__main__":
     foldername= "wikirag"
-    # scrapper = WikiScrapper(path = foldername)
-    # scrapper.scrapeAndSaveArticles(n=200) #this outputs A_r
-    # scrapper.filterforDate(foldername+ "/A_r.pkl") #this outputs A_d
-    # scrapper.genQs(foldername+ "/A_d.pkl") #add qs to file
-    # scrapper.filterForRecentness(foldername+ "/A_d.pkl") #outputs A_f
+    scrapper = WikiScrapper(path = foldername)
+    scrapper.scrapeAndSaveArticles(n=200) #this outputs A_r
+    scrapper.filterforDate(foldername+ "/A_r.pkl") #this outputs A_d
+    scrapper.genQs(foldername+ "/A_d.pkl") #add qs to file
+    scrapper.filterForRecentness(foldername+ "/A_d.pkl") #outputs A_f
 
-    # chatbot = Chatbot(ragType="Naive")
-    # description = f"This a naive RAG run."
-    # genAnswers(f"{foldername}/A_f.pkl",chatbot, description=description)
+    chatbot = Chatbot(ragType="Naive")
+    description = f"This a naive RAG run."
+    genAnswers(f"{foldername}/A_f.pkl",chatbot, description=description)
 
 
     evaluator = Evaluator()
